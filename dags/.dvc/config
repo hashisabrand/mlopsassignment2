@@ -1,5 +1,0 @@
-[core]
-    no_scm = True
-    remote = mygoogledrive
-['remote "mygoogledrive"']
-    url = gdrive://1yEqjM0z7W0FLi39MKUfv1wB-ngRRD_qB

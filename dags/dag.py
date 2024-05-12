@@ -76,10 +76,10 @@ def extract():
             if title and description:
                 data.append({'title': title, 'description': description, 'source': source})
                 article_counter += 1
-                if article_counter >= 5:
+                if article_counter >= 7:
                     break
 
-        if article_counter >= 5:
+        if article_counter >= 7:
             break
 
     return data
@@ -146,13 +146,14 @@ load_task = PythonOperator(
     python_callable=lambda: load(transform(extract())),
     dag=dag
 )
-
+    
 # Construct the DVC add and push command
 dvc_add_and_push_command = f"""
 cd {os.path.dirname(__file__)}
-pip install dvc && pip install dvc-gdrive && \
+pip install dvc && \
+pip install dvc-gdrive && \
 dvc init -f --no-scm && \
-dvc remote add -d mygoogleDrive gdrive://1akLltC_11ZTBzZF-D4cZt_sZIf-jheJE && \
+dvc remote add -d mygoogleDrive gdrive://1V2UrWUsSbvIBEZOPf39Cu3Cfqbnll4Gh && \
 dvc add extracted_data.csv && \
 dvc push -r mygoogleDrive
 """
